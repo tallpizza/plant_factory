@@ -20,7 +20,6 @@ class MqttHandler with ChangeNotifier {
     client.onSubscribeFail = onSubscribeFail;
     client.pongCallback = pong;
     client.keepAlivePeriod = 60;
-    client.logging(on: true);
 
     /// Set the correct MQTT protocol for mosquito
     client.setProtocolV311();
