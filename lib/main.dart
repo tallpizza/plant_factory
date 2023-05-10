@@ -44,37 +44,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('Data received:',
-                  style: TextStyle(color: Colors.black, fontSize: 25)),
-              ValueListenableBuilder<String>(
-                  builder: (BuildContext context, String value, Widget? child) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Text("$value °C",
-                            style: const TextStyle(
-                                color: Colors.deepPurpleAccent, fontSize: 35))
-                      ],
-                    );
-                  },
-                  valueListenable: mqttHandler.temp),
-              ValueListenableBuilder<String>(
-                  builder: (BuildContext context, String value, Widget? child) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Text("$value%",
-                            style: const TextStyle(
-                                color: Colors.deepPurpleAccent, fontSize: 35))
-                      ],
-                    );
-                  },
-                  valueListenable: mqttHandler.humi),
-            ],
-          ),
           Positioned(
             top: _top,
             left: _left,
@@ -86,11 +55,44 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 });
               },
               child: Container(
-                width: 50,
-                height: 50,
+                width: 200,
+                height: 200,
                 decoration: const BoxDecoration(
-                  color: Colors.red,
+                  color: Colors.lightBlue,
                   shape: BoxShape.circle,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ValueListenableBuilder<String>(
+                        builder: (BuildContext context, String value,
+                            Widget? child) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text("$value%",
+                                  style: const TextStyle(
+                                      color: Colors.deepPurpleAccent,
+                                      fontSize: 35))
+                            ],
+                          );
+                        },
+                        valueListenable: mqttHandler.humi),
+                    ValueListenableBuilder<String>(
+                        builder: (BuildContext context, String value,
+                            Widget? child) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text("$value °C",
+                                  style: const TextStyle(
+                                      color: Colors.deepPurpleAccent,
+                                      fontSize: 35))
+                            ],
+                          );
+                        },
+                        valueListenable: mqttHandler.temp),
+                  ],
                 ),
               ),
             ),
